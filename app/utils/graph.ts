@@ -1,7 +1,7 @@
 interface Actor {
-  id: string;
-  name: string;
-  profile_path: string;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
+  profile_path?: string | null | undefined;
 }
 
 interface ActorConnections {

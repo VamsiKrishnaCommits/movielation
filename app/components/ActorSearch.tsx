@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-const ActorSearch = ({ onSelect, placeholder, selectedActor }) => {
+const ActorSearch = ({ onSelect, placeholder, selectedActor }: { onSelect: (actor: any) => void, placeholder: string, selectedActor: any }) => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [isOpen, setIsOpen] = useState(false)
@@ -33,14 +33,14 @@ const ActorSearch = ({ onSelect, placeholder, selectedActor }) => {
     return () => clearTimeout(timeoutId)
   }, [query])
 
-  const handleSelect = (actor) => {
+  const handleSelect = (actor: any) => {
     onSelect(actor)
     setQuery(actor.name)
     setIsOpen(false)
     setResults([])
   }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setQuery(e.target.value)
     if (selectedActor && e.target.value !== selectedActor.name) {
       onSelect(null)
