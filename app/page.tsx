@@ -36,7 +36,7 @@ export default function Home() {
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 relative">
       <AnimatedBackground />
       <div className="max-w-lg mx-auto">
-        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg overflow-hidden backdrop-filter backdrop-blur-lg">
+        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg overflow-visible backdrop-filter backdrop-blur-lg">
           <div className="px-4 py-5 sm:p-6">
             <h1 className="text-4xl font-extrabold text-center text-purple-600 mb-6">
               Movielation
