@@ -22,67 +22,40 @@ export default function Home() {
   }
 
   return (
-    <main className="main">
-      <h1 className="title">Actor Connection Finder</h1>
-      <div className="search-container">
-        <ActorSearch onSelect={setActor1} placeholder="Search for first actor" selectedActor={actor1} />
-        <ActorSearch onSelect={setActor2} placeholder="Search for second actor" selectedActor={actor2} />
+    <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-lg shadow-2xl overflow-visible">
+          <div className="px-6 py-8 sm:p-10">
+            <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-6">
+              Movielation: Actor Connection Finder
+            </h1>
+            <p className="text-center text-gray-600 mb-8">
+              Discover how actors are connected through their movie collaborations. 
+              Enter two actors' names and uncover the degrees of separation between them!
+            </p>
+            <div className="flex space-x-4 mb-6">
+              <div className="flex-1">
+                <ActorSearch onSelect={setActor1} placeholder="Search for first actor" selectedActor={actor1} />
+              </div>
+              <div className="flex-1">
+                <ActorSearch onSelect={setActor2} placeholder="Search for second actor" selectedActor={actor2} />
+              </div>
+            </div>
+            <button 
+              className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+              onClick={handleFindConnection}
+              disabled={!actor1 || !actor2}
+            >
+              Find Connection
+            </button>
+          </div>
+          {connection && (
+            <div className="border-t border-gray-200">
+              <ConnectionDisplay connection={connection} />
+            </div>
+          )}
+        </div>
       </div>
-      <button 
-        className="find-button" 
-        onClick={handleFindConnection}
-        disabled={!actor1 || !actor2}
-      >
-        Find Connection
-      </button>
-      {connection && <ConnectionDisplay connection={connection} />}
-      <style jsx>{`
-        .main {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 2rem;
-          min-height: 100vh;
-          background-color: #f5f5f5;
-          font-family: Arial, sans-serif;
-        }
-        .title {
-          font-size: 2.5rem;
-          margin-bottom: 2rem;
-          text-align: center;
-          color: #333;
-          text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .search-container {
-          display: flex;
-          gap: 1rem;
-          margin-bottom: 1rem;
-          width: 100%;
-          max-width: 800px;
-        }
-        .find-button {
-          padding: 0.75rem 1.5rem;
-          font-size: 1.1rem;
-          background-color: #0070f3;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .find-button:hover {
-          background-color: #0051a2;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .find-button:disabled {
-          background-color: #ccc;
-          cursor: not-allowed;
-          transform: none;
-          box-shadow: none;
-        }
-      `}</style>
     </main>
   )
 }

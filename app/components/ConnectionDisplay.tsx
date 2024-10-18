@@ -2,99 +2,43 @@ import Image from 'next/image'
 
 const ConnectionDisplay = ({ connection }) => {
   return (
-    <div className="connection-container">
-      <h2 className="connection-title">Connection Found!</h2>
-      <div className="actors-container">
-        {connection.path.map((actor, index) => (
-          <div key={actor.id} className="actor-connection">
-            <div className="actor-card">
-              <Image
-                src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                alt={actor.name}
-                width={185}
-                height={278}
-                className="actor-image"
-              />
-              <p className="actor-name">{actor.name}</p>
-            </div>
-            {index < connection.path.length - 1 && (
-              <div className="connection-arrow">
-                <span className="arrow">→</span>
-                <div className="movie-connection">
-                  <p>Appeared together in:</p>
-                  <ul>
-                    {connection.movies[index].map((movie) => (
-                      <li key={movie}>{movie}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
+    <div className="bg-white overflow-hidden">
+      <div className="px-4 py-5 sm:px-6">
+        <h3 className="text-lg leading-6 font-medium text-gray-900">Connection Found!</h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">Degrees of separation: {connection.path.length - 1}</p>
       </div>
-      <style jsx>{`
-        .connection-container {
-          padding: 20px;
-          background-color: #fff;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-          margin-top: 2rem;
-        }
-        .connection-title {
-          text-align: center;
-          color: #333;
-          margin-bottom: 20px;
-          font-size: 1.8rem;
-        }
-        .actors-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-        .actor-connection {
-          display: flex;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-        .actor-card {
-          background-color: #f9f9f9;
-          border-radius: 8px;
-          padding: 15px;
-          text-align: center;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .actor-image {
-          border-radius: 8px;
-        }
-        .actor-name {
-          margin: 10px 0;
-          font-weight: bold;
-        }
-        .connection-arrow {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin: 0 20px;
-        }
-        .arrow {
-          font-size: 2rem;
-          color: #0070f3;
-        }
-        .movie-connection {
-          margin-top: 10px;
-          font-size: 0.9em;
-          text-align: center;
-        }
-        .movie-connection ul {
-          list-style-type: none;
-          padding: 0;
-        }
-        .movie-connection li {
-          margin: 5px 0;
-        }
-      `}</style>
+      <div className="border-t border-gray-200">
+        <dl>
+          {connection.path.map((actor, index) => (
+            <div key={actor.id} className={index % 2 === 0 ? 'bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6' : 'bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'}>
+              <dt className="text-sm font-medium text-gray-500">
+                <div className="flex items-center">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+                    alt={actor.name}
+                    width={92}
+                    height={138}
+                    className="rounded-md shadow-md"
+                  />
+                  <span className="ml-3 text-lg font-semibold">{actor.name}</span>
+                </div>
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {index < connection.path.length - 1 && (
+                  <div>
+                    <p className="font-medium text-indigo-600">Appeared with {connection.path[index + 1].name} in:</p>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                      {connection.movies[index].map((movie) => (
+                        <li key={movie} className="text-gray-700">{movie}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   )
 }
