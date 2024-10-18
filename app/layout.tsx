@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Movielation",
+  title: "Movielation"
 };
 
 export default function RootLayout({
