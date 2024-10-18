@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import ActorSearch from './components/ActorSearch'
 import ConnectionDisplay from './components/ConnectionDisplay'
+import Introduction from './components/Introduction'
+import AnimatedBackground from './components/AnimatedBackground'
+import CreatorInfo from './components/CreatorInfo'
 
 export default function Home() {
   const [actor1, setActor1] = useState(null)
@@ -30,19 +33,21 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-6 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 relative">
+      <AnimatedBackground />
       <div className="max-w-lg mx-auto">
-        <div className="bg-white rounded-lg shadow-2xl overflow-visible">
-          <div className="px-4 py-6 sm:p-6">
-            <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-6">
-              Actor Connection Finder
+        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg overflow-hidden backdrop-filter backdrop-blur-lg">
+          <div className="px-4 py-5 sm:p-6">
+            <h1 className="text-4xl font-extrabold text-center text-purple-600 mb-6">
+              Movielation
             </h1>
+            <Introduction />
             <div className="space-y-4 mb-6">
-              <ActorSearch onSelect={setActor1} placeholder="Search for first actor" selectedActor={actor1} />
-              <ActorSearch onSelect={setActor2} placeholder="Search for second actor" selectedActor={actor2} />
+              <ActorSearch onSelect={setActor1} placeholder="Search for first Telugu actor" selectedActor={actor1} />
+              <ActorSearch onSelect={setActor2} placeholder="Search for second Telugu actor" selectedActor={actor2} />
             </div>
             <button 
-              className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+              className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-300 ease-in-out transform hover:scale-105"
               onClick={handleFindConnection}
               disabled={!actor1 || !actor2 || isLoading}
             >
@@ -55,13 +60,14 @@ export default function Home() {
                   Finding Connection...
                 </span>
               ) : (
-                'Find Connection'
+                'Discover the Connection!'
               )}
             </button>
           </div>
           {connection && <ConnectionDisplay connection={connection} />}
         </div>
       </div>
+      <CreatorInfo />
     </main>
   )
 }
