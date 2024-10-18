@@ -7,6 +7,7 @@ const ActorSearch = ({ onSelect, placeholder, selectedActor }: { onSelect: (acto
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const wrapperRef = useRef(null)
 
   useEffect(() => {
@@ -20,10 +21,12 @@ const ActorSearch = ({ onSelect, placeholder, selectedActor }: { onSelect: (acto
   useEffect(() => {
     const fetchActors = async () => {
       if (query.length > 2 && query !== selectedActor?.name) {
+        setIsLoading(true)
         const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
         const data = await response.json()
         setResults(data)
         setIsOpen(true)
+        setIsLoading(false)
       } else {
         setResults([])
         setIsOpen(false)
@@ -72,6 +75,11 @@ const ActorSearch = ({ onSelect, placeholder, selectedActor }: { onSelect: (acto
         placeholder={placeholder}
         className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500"
       />
+      {isLoading && (
+        <div className="absolute right-3 top-2">
+          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-500"></div>
+        </div>
+      )}
       {isOpen && results.length > 0 && (
         <ul className="absolute z-50 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
           {results.map((actor) => (
