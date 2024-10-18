@@ -3,37 +3,34 @@ import Image from 'next/image'
 const ConnectionDisplay = ({ connection }) => {
   return (
     <div className="bg-white p-4 sm:p-6">
-      <h2 className="text-2xl font-bold text-center mb-6 text-indigo-700">Connection Found!</h2>
-      <div className="flex flex-col items-center max-w-md mx-auto">
+      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Connection Found</h2>
+      <div className="space-y-4">
         {connection.path.map((actor, index) => (
-          <div key={actor.id} className="w-full">
-            <div className="flex items-center mb-4">
+          <div key={actor.id} className="flex items-center">
+            <div className="flex-shrink-0 w-12 h-12 mr-4">
               <Image
                 src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
                 alt={actor.name}
-                width={60}
-                height={90}
-                className="rounded-full border-2 border-indigo-500"
+                width={48}
+                height={48}
+                className="rounded-full"
               />
-              <span className="ml-4 font-semibold text-lg text-gray-800">{actor.name}</span>
             </div>
-            {index < connection.path.length - 1 && (
-              <div className="ml-8 mb-4">
-                <p className="text-sm font-medium text-indigo-600">Appeared with {connection.path[index + 1].name} in:</p>
-                <ul className="list-disc list-inside text-sm text-gray-600 mt-1">
-                  {connection.movies[index].map((movie, movieIndex) => (
-                    <li key={movieIndex}>{movie}</li>
-                  ))}
-                </ul>
-                <div className="border-l-2 border-indigo-500 h-8 ml-4 my-2"></div>
-              </div>
-            )}
+            <div className="flex-grow">
+              <p className="font-medium text-gray-800">{actor.name}</p>
+              {index < connection.path.length - 1 && (
+                <p className="text-sm text-gray-500 mt-1">
+                  ↓ {connection.movies[index][0]}
+                  {connection.movies[index].length > 1 && ` (+${connection.movies[index].length - 1} more)`}
+                </p>
+              )}
+            </div>
           </div>
         ))}
-        <p className="mt-6 text-lg font-medium text-indigo-700">
-          Degrees of separation: {connection.path.length - 1}
-        </p>
       </div>
+      <p className="mt-6 text-center text-gray-600">
+        Degrees of separation: {connection.path.length - 1}
+      </p>
     </div>
   )
 }
