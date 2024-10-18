@@ -23,7 +23,6 @@ export default function Home() {
         setConnection(data)
       } catch (error) {
         console.error('Error finding connection:', error)
-        // Optionally, set an error state here to display to the user
       } finally {
         setIsLoading(false)
       }
@@ -31,24 +30,16 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-6 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-lg mx-auto">
         <div className="bg-white rounded-lg shadow-2xl overflow-visible">
-          <div className="px-6 py-8 sm:p-10">
-            <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-6">
-              Movielation: Actor Connection Finder
+          <div className="px-4 py-6 sm:p-6">
+            <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-6">
+              Actor Connection Finder
             </h1>
-            <p className="text-center text-gray-600 mb-8">
-              Discover how actors are connected through their movie collaborations. 
-              Enter two actors' names and uncover the degrees of separation between them!
-            </p>
-            <div className="flex space-x-4 mb-6">
-              <div className="flex-1">
-                <ActorSearch onSelect={setActor1} placeholder="Search for first actor" selectedActor={actor1} />
-              </div>
-              <div className="flex-1">
-                <ActorSearch onSelect={setActor2} placeholder="Search for second actor" selectedActor={actor2} />
-              </div>
+            <div className="space-y-4 mb-6">
+              <ActorSearch onSelect={setActor1} placeholder="Search for first actor" selectedActor={actor1} />
+              <ActorSearch onSelect={setActor2} placeholder="Search for second actor" selectedActor={actor2} />
             </div>
             <button 
               className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
@@ -68,11 +59,7 @@ export default function Home() {
               )}
             </button>
           </div>
-          {connection && (
-            <div className="border-t border-gray-200">
-              <ConnectionDisplay connection={connection} />
-            </div>
-          )}
+          {connection && <ConnectionDisplay connection={connection} />}
         </div>
       </div>
     </main>
