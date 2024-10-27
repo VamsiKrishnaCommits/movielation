@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Orbitron } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const orbitron = Orbitron({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Movielation"
+  title: "Movielation - Discover Telugu Cinema Connections",
+  description: "Explore the fascinating world of Telugu cinema connections with Movielation.",
 };
 
 export default function RootLayout({
@@ -24,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${orbitron.className} bg-gradient-tech min-h-screen`}>
         {children}
       </body>
     </html>
